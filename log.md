@@ -71,6 +71,9 @@
 
 -Now I can connect with ssh ~ubuntu@65.0.7.234~ ubuntu@13.235.82.67
 
+-added ssl's key
+"ssh-rsa AAAAB3NzaC1yc2EAAAASSSSSSSSSSSfgjmclM0fbj/K/NYqNcfNovc0GDztI+LQwGuP6Z+P8XXXXXXXXXXXXXXXXXkpfRp8vu8oh8epvqFICCCCCCCCCCCCCCCCCCCCCCCCCcserver"
+
 # fail2ban
 
 -Setup fail2ban, downloaded it from apt and set the max tries to 5 and ban time to 10 mins
@@ -82,18 +85,31 @@
 
 - set these setting:
 
+[default]
+maxretry = 3
+findtime = 600
+bantime = 3600
+
 [sshd]
 enabled = true
 port = ssh
 filter = sshd
 logpath = /var/log/auth.log
-maxretry = 3
-findtime = 600
-bantime = 3600
 
 - sudo systemctl enable fail2ban && sudo systemctl start fail2ban
 
 - doesnt work wtf
+
+- [BR]: ERROR No module named 'asynchat' on Ubuntu 24.04
+
+- ubuntu 24.04 doesnt support the newest version of python, found a script to fix it on github
+
+-ran script (https://github.com/alexdcodes/ConfigureUbuntu/blob/main/fail2ban/install.sh)
+-worked
+
+-made above changes
+
+-should work now
 
 # ufw
 
@@ -109,6 +125,11 @@ bantime = 3600
 sudo ufw status
 Status: active
 
+- but this stops me from ssh-ing in
+- so sudo ufw allow ssh
+
+-works
+
 '''
 To Action From
 
@@ -120,4 +141,53 @@ To Action From
 2222/tcp (v6) ALLOW Anywhere (v6)  
 80/tcp (v6) ALLOW Anywhere (v6)  
 443/tcp (v6) ALLOW Anywhere (v6)  
+'''
+
+## ufw logging
+
+-sudo ufw logging medium
+-sudo ufw status verbose
+
+- didnt work cos my whole logging this had an error so i "sudo service rsyslog restart" and it works
+
+# Sidequest
+
+- ssh was being a nuisance so i did sudo apt install openssh
+- kinda works now but had to go and redo the whole ssh config
+
+- tried to set up zsh cos i hate bash but chsh asks for a password which then says pam auth failed. gotta ask around
+
+- pam is prolly the reason i cant chsh i gotta fix that
+
+- tried changind the chsh file in pam.d but didnt work
+
+- ended up just adding zsh to the end of bashrc (lifehax) and figlet for a nice welcome message
+
+- got oh my zsh and copied some of my plugins over. life is better now
+
+# Google 2fa
+
+- i tried this on the other vm i made before i got locked out and it asked for password even after verification code, tried again here
+
+- sudo apt-get install libpam-google-authenticator
+
+- ran google-authenticator and set it up with the qr code and the app
+
+-added teh following to /etc/pam.d/sshd
+'''
+auth required pam_google_authenticator.so nullok
+auth required pam_permit.so
+'''
+
+- added "ChallengeResponseAuthentication yes" and to etc/ssh/sshd_config and restarted ssh
+
+- added "AuthenticationMethods publickey,password publickey,keyboard-interactive" to the ssd_config
+
+- commented out the following in the pam.d config
+
+'''
+
+# Standard Un\*x authentication.
+
+#@include common-auth
 '''
