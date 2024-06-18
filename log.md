@@ -187,7 +187,31 @@ auth required pam_permit.so
 
 '''
 
-# Standard Un\*x authentication.
+Standard Un\*x authentication.
 
 #@include common-auth
 '''
+
+- it works now :)
+
+# Set up Suricata IDS
+
+- Wanted to try Snort but it wanted me to sign up i think
+
+- Installed suricata
+
+- Used the tgreen/hunting ruleset for configuring it
+
+- Tested it with curl http://testmynids.org/uid/index.html
+
+- got the correct output - it works
+
+- added it to the startup scripts
+
+# make the accounts
+
+sudo adduser exam_1 - password : exam1
+sudo adduser exam_2 - password : exam2
+sudo adduser exam_3 - password : exam3
+sudo adduser examadmin - password : examadmin
+sudo adduser examaudit - password : examaudit

@@ -16,19 +16,19 @@
 
 ### 1. Initial Setup (4 pts)
 
-1. **Create an Ubuntu VM in Azure:** (2pts)
+1. **Create an Ubuntu VM in Azure:** (2pts) DONE
 
    - Login with NITC Mail id and claim student benefits (either through github pro pack or azure student id), or debit card connect in AWS (they have free tier VMs).
    - Use any of the following Ubuntu versions: 20.04, 22.04.
    - Update the IP of your VM in the shared document, you will be assigned a domain for that IP.
 
-2. **System Updates and Security:** (2pts)
+2. **System Updates and Security:** (2pts) DONE
    - Update the system packages.
    - Set up unattended upgrades to ensure the system always receives the latest security updates.
 
 ### 2. Enhanced SSH Security (6pts)
 
-1. **SSH Configuration:** (1+1+2+1+1pts)
+1. **SSH Configuration:** (1+1+2+1+1pts) DONE
 
    - Disable root login.
    - Disable password-based authentication.
@@ -37,20 +37,20 @@
    - Set up fail2ban to protect against brute-force attacks. **(NEW)**
    - Add our key so that we can ssh in as a user with superuser privileges(will be shared later)
 
-2. **Multi-Factor Authentication (MFA):** _[Optional]_
+2. **Multi-Factor Authentication (MFA):** _[Optional]_ DONE
    - Install and configure Google Authenticator or any other MFA tool to secure SSH login. **(NEW)**
 
 ### 3. Firewall and Network Security (4pts)
 
 _Warning, make sure you dont lock yourself out by blocking ssh. You would most likely have to reset and start over._
 
-1. **Firewall Configuration:**
+1. **Firewall Configuration:** DONE
 
    - Configure UFW to deny all incoming traffic except for SSH (on a non-default port, e.g., 2222), HTTP, and HTTPS. **(NEW)**
    - Ensure that the UFW logs are enabled for auditing purposes. **(NEW)**
    - Readup more about iptables and how ufw works
 
-2. **Intrusion Detection System (IDS):** _[Optional]_
+2. **Intrusion Detection System (IDS):** _[Optional]_ DONE
    - Install and configure an IDS like Snort or Suricata. **(NEW)**
    - Set up rules to monitor and alert on suspicious activities.**(NEW)**
 
