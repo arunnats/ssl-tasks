@@ -215,3 +215,60 @@ sudo adduser exam_2 - password : exam2
 sudo adduser exam_3 - password : exam3
 sudo adduser examadmin - password : examadmin
 sudo adduser examaudit - password : examaudit
+
+sudo usermod -aG sudo examadmin - made it super user
+
+sudo groupadd home_audit
+sudo usermod -aG home_audit examaudit - added audit to his group
+
+sudo chown exam_1:home_audit /home/exam_1
+sudo chmod 750 /home/exam_1
+sudo chown exam_1:home_audit /home/exam_1
+sudo chmod 750 /home/exam_1
+sudo chown exam_1:home_audit /home/exam_1
+sudo chmod 750 /home/exam_1
+
+ls -ld /home/exam_1 /home/exam_2 /home/exam_3 to check if its all good
+
+essentially ive made it so that " " ADD HERE
+
+# ssh access into these accounts
+
+so far im using $sudo su - account name but i want to be able to ssh into it directly
+
+- need to generate keys for each account
+
+from local computer
+$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/exam_1_rsa - $
+
+from root user
+$ sudo mkdir -p /home/exam_1/.ssh
+sudo chmod 700 /home/exam_1/.ssh $
+
+from local computer
+$ scp -i redacted.pem ~/.ssh/exam_1_rsa.pub ubuntu@13.235.82.67:/home/ubuntu/exam_1_rsa.pub $
+
+from root user
+$ sudo mv /home/ubuntu/exam_1_rsa.pub /home/exam_1/.ssh/authorized_keys
+sudo chmod 600 /home/exam_1/.ssh/authorized_keys
+sudo chown -R exam_1:exam_1 /home/exam_1/.ssh$
+
+this works now "ssh -i ~/.ssh/exam_1_rsa exam_1@13.235.82.67" but i'll add my local pc's key to them all for east access
+
+from local computer
+$ scp -i path_to_your_aws_key.pem ~/.ssh/id_rsa.pub ubuntu@13.235.82.67:/home/ubuntu/id_rsa.pub $
+
+from root user
+$ sudo mkdir -p /home/exam_1/.ssh
+sudo chmod 700 /home/exam_1/.ssh
+
+sudo mv /home/ubuntu/id_rsa.pub /home/exam_1/.ssh/temp_id_rsa.pub
+
+sudo sh -c 'cat /home/exam_1/.ssh/temp_id_rsa.pub >> /home/exam_1/.ssh/authorized_keys'
+
+sudo chmod 600 /home/exam_1/.ssh/authorized_keys
+sudo chown -R exam_1:exam_1 /home/exam_1/.ssh $
+
+Instead of doing this for the rest, imma jsut make a script to automate this
+
+nvm script was risky, time to run these manually
