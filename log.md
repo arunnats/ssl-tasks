@@ -250,8 +250,6 @@ $ scp -i redacted.pem ~/.ssh/exam_1_rsa.pub ubuntu@13.235.82.67:/home/ubuntu/exa
 
 from root user
 $ sudo mv /home/ubuntu/exam_1_rsa.pub /home/exam_1/.ssh/authorized_keys
-sudo chmod 600 /home/exam_1/.ssh/authorized_keys
-sudo chown -R exam_1:exam_1 /home/exam_1/.ssh$
 
 this works now "ssh -i ~/.ssh/exam_1_rsa exam_1@13.235.82.67" but i'll add my local pc's key to them all for east access
 
@@ -259,16 +257,17 @@ from local computer
 $ scp -i path_to_your_aws_key.pem ~/.ssh/id_rsa.pub ubuntu@13.235.82.67:/home/ubuntu/id_rsa.pub $
 
 from root user
-$ sudo mkdir -p /home/exam_1/.ssh
-sudo chmod 700 /home/exam_1/.ssh
 
-sudo mv /home/ubuntu/id_rsa.pub /home/exam_1/.ssh/temp_id_rsa.pub
+$sudo mv /home/ubuntu/id_rsa.pub /home/exam_1/.ssh/temp_id_rsa.pub
 
 sudo sh -c 'cat /home/exam_1/.ssh/temp_id_rsa.pub >> /home/exam_1/.ssh/authorized_keys'
 
 sudo chmod 600 /home/exam_1/.ssh/authorized_keys
 sudo chown -R exam_1:exam_1 /home/exam_1/.ssh $
 
+sudo rm /home/exam_1/.ssh/temp_id_rsa.pub
 Instead of doing this for the rest, imma jsut make a script to automate this
 
 nvm script was risky, time to run these manually
+
+-worksm i can use ssh username@13.235.82.67 and all the permissions work as instructed
