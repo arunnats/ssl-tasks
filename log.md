@@ -4,9 +4,10 @@
 
 -Set up AWS instance
 
--Public ip : ~65.0.7.234~ 13.235.82.67 (Lost the first one cos i set the ip to my own but then my router restarted so its gone lmao)
+-Public ip : ~65.0.7.234~ ~13.235.82.67 (Lost the first one cos i set the ip to my own but then my router restarted so its gone lmao) ~ 4.240.104.178 switches to azure cos aws dumb
+no arunnats@arun.ssl.airno.de
 
--Private ip : 172.31.8.134
+-Private ip : redacted
 
 -No elastic ip so do not turn it off
 
@@ -31,7 +32,7 @@
 
 -"$lsb_release -c" to get the codename " Noble "
 
--Navigated to "etc/apt/apt.conf.d/50unattended-upgrades"
+-Navigated to " "
 
 -Used nano to set up the package lists to ubuntu@noble and turned on settings for :
 
@@ -196,6 +197,8 @@ Standard Un\*x authentication.
 
 # Set up Suricata IDS
 
+(https://www.digitalocean.com/community/tutorials/how-to-install-suricata-on-ubuntu-20-04#step-2-configuring-suricata-for-the-first-time)
+
 - Wanted to try Snort but it wanted me to sign up i think
 
 - Installed suricata
@@ -228,6 +231,8 @@ sudo chmod 750 /home/exam_1
 sudo chown exam_1:home_audit /home/exam_1
 sudo chmod 750 /home/exam_1
 
+sudo usermod -aG home_audit examadmin - to add examadmin to the group
+
 ls -ld /home/exam_1 /home/exam_2 /home/exam_3 to check if its all good
 
 essentially ive made it so that " " ADD HERE
@@ -243,7 +248,6 @@ $ ssh-keygen -t rsa -b 4096 -f ~/.ssh/exam_1_rsa - $
 
 from root user
 $ sudo mkdir -p /home/exam_1/.ssh
-sudo chmod 700 /home/exam_1/.ssh $
 
 from local computer
 $ scp -i redacted.pem ~/.ssh/exam_1_rsa.pub ubuntu@13.235.82.67:/home/ubuntu/exam_1_rsa.pub $
@@ -271,3 +275,9 @@ Instead of doing this for the rest, imma jsut make a script to automate this
 nvm script was risky, time to run these manually
 
 -worksm i can use ssh username@13.235.82.67 and all the permissions work as instructed
+
+## directory safetly
+
+ran "sudo chmod 700 /home/exam_1/.ssh $" from the root - works, exam_1 can only access exam 1
+
+- ok this broke my vm, fucked over my entire progress and i have to start again i hate this so much. might switch to azure next time
