@@ -507,3 +507,15 @@ docker-compose up -d --build
 
 -docker-compose pull && docker-compose up -d
 idk it says it started, i trust vysakhettan
+
+-it worked
+
+-set up nginx with the reverse proxy
+
+-then set up the nginx config
+
+-doesntn work??
+
+-turns out aws doesnt let you assign a domain without using a differnet subservice (costs moneys)
+
+-works kinda with the vysakhettan app
